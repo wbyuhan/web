@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const data = {
+            msg: "哈哈哈我是小明"
+        }
+        let vm = {}
+            // 数据劫持
+
+        Object.defineProperty(vm, "msg", {
+            // 可枚举
+            enumerable: true,
+            // 可配置
+            configurable: true,
+            get() {
+                return data.msg
+            },
+            set(newVal) {
+                console.log('%c 🍒 newVal: ', 'font-size:20px;background-color: #42b983;color:#fff;', newVal);
+                if (newVal === data.msg) return
+                data.msg = newVal
+                document.querySelector('#app').textContent = data.msg
+            }
+        })
+
+        vm.msg = "hellow"
+        console.log('%c 🍵 vm: ', 'font-size:20px;background-color: #3F7CFF;color:#fff;', vm);
+    </script>
+</body>
+
+</html>
