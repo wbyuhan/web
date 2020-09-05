@@ -5,7 +5,7 @@ class Vue {
         this.$data = options.data || {}
         this.$el = typeof options.el === 'string' ? document.querySelector(options.el) : options.el
         this._proxData(this.$data)
-            // new Observer(this.$data)
+        new Observer(this.$data)
     }
     _proxData(data) {
         Object.keys(data).forEach(key => {
