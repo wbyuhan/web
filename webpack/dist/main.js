@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[0],{cHpx:function(o,c){console.log("test");console.log("%c 🥖 test: ","font-size:20px;background-color: #FCA650;color:#fff;","代理");console.log("%c 🍞 test: ","font-size:20px;background-color: #2EAFB0;color:#fff;","dddd")}},[["cHpx",1]]]);
+//# sourceMappingURL=main.js.map
