@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .aside {
+            margin-bottom: 100px;
+            width: 100px;
+            height: 150px;
+            background: #f66;
+        }
+        
+        .main {
+            margin-top: 100px;
+            height: 200px;
+            background: #fcc;
+        }
+        
+        .text {
+            /*盒子main的外面包一个div，通过改变此div的属性使两个盒子分属于两个不同的BFC，以此来阻止margin重叠*/
+            overflow: hidden;
+            /*此时已经触发了BFC属性。*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="aside"></div>
+    <div class="text">
+        <div class="main"></div>
+    </div>
+    <script>
+        // Function.prototype.myApply = function(context) {
+        //     if (typeof this !== 'function') {
+        //         throw new TypeError('Error')
+        //     }
+        //     context = context || window
+        //     context.fun = this
+        //     let result
+        //     if (arguments[1]) {
+        //         result = context.fun(...arguments[1])
+        //     } else {
+        //         result = context.fun
+        //     }
+        //     delete context.fun
+        //     return result
+        // }
+        // Function.prototype.myCall = function(context) {
+        //     if (typeof this !== 'function') {
+        //         throw new TypeError('Error')
+        //     }
+        //     context = context || window
+        //     context.fun = this
+        //     const arg = [...arguments].splice(1)
+        //     let result = context.fun(...arg)
+        //     delete context.fun
+        //     return result
+        // }
+        // Function.prototype.bind = function(context) {
+        //         if (typeof this !== 'function') {
+        //             throw new TypeError('error')
+        //         }
+        //         const _this = this
+        //         const arg = [...arguments].splice(1)
+        //         return function F() {
+        //             if (this instanceof F) {
+        //                 return new _this(...arg, ...arguments)
+        //             }
+        //             return _this.apply(context, args.concat(...arguments))
+        //         }
+        //     }
+        //     // new 
+        //     // 1新生成一个对象 链接原型 绑定this 返回新的对象
+        // function myNew() {
+        //     let ob = {}
+        //     let Arg = [].shift.call(arguments)
+        //     ob._proto_ = Arg.prototype
+        //     let result = Arg.apply(ob, arguments)
+        //     return result instanceof Object ? result : ob
+        // }
+        // // 调用
+        // const p = myNew()
+        // console.log('%c 🍺 p: ', 'font-size:20px;background-color: #6EC1C2;color:#fff;', p);
+        // // 节流
+        // const throttle = (func, wait = 50) => {
+        //     let lastTime = 0
+        //     return function(...arguments) {
+        //         let now = +new Date()
+        //         if (now - lastTime > await) {
+        //             lastTime = now
+        //             func.apply(this, arguments)
+        //         }
+        //     }
+        // }
+        // setInterval(
+        //         throttle(() => {
+        //             console.log(1)
+        //         }, 500),
+        //         1
+        //     )
+        // webpack相关
+        /**module.exports = {
+            mode:'production',
+            entry: {
+
+            },
+            output:{
+
+            },
+            plugins:[
+
+            ],
+            module:{ // loader:用于对模块源代码进行转换
+                // 配置式：
+                rules:[
+
+                ]
+            }
+        }*/
+        var cat = {
+            name: '喵喵',
+            eat1: function(v1, v2) {
+                console.log('吃鱼')
+                console.log(this.name)
+                console.log('v1' + v1, 'v2' + v2)
+            }
+        }
+        var dog = {
+            name: '汪汪',
+            eat2: function(d1, d2) {
+                console.log('啃骨头')
+                console.log(this)
+                console.log('d1' + d1, 'd2' + d2)
+            }
+        }
+        cat.eat1.call(dog, "旺财-13岁", "call")
+        var eatFishFun = cat.eat1.bind(dog, "旺财-13岁", "bind")
+        eatFishFun('hahah', 'xiixix')
+        console.log('%c 🍒   eatFishFun(): ', 'font-size:20px;background-color: #2EAFB0;color:#fff;', eatFishFun);
+
+
+         
+        var b = 10;
+        (function b(b) {
+            b = 20
+            console.log(b);
+            console.log(this.b)
+        })(b)
+        // console.log(b);
+
+        ;
+        (function a() {
+            a = 30
+            console.log(a)
+        })()
+
+        // js 基础知识
+        // 基本数据类型，复杂数据类型 函数 new关键字 构造函数 作用域 原型 原型链 闭包 this问题 call apply bind 浮点数 类型转换 赋值/深拷贝/浅拷贝 继承
+        // es6 var let const 解构 扩展运算符 class 继承 模块化 Symbol promise async awite EventLoop Proxy 数组循环API（map some reduce。。。） Generator 
+        // 浏览器基础 事件机制（冒泡/捕获） 注册事件 addEventListener / CustomEvent dispatchEvent 缓存 cookie sessionStorage/localStorage/indeDB 
+        // 浏览器DOM 重绘/回流 WebKit渲染引擎：HTML->dom:字节数据=> 字符串 =>通过词法分析转换为标记 => 转换为Node => Dom树 CSS: 字节数据 => 字符串=>通过词法分析转换为标记 => 转换为Node => cssom树
+        // 浏览器递归cssom dom + cssom = 渲染树  浏览器根据渲染树进行布局（回流）重绘是当节点需要更改外观而不会影响布局的，比如改变 color 就叫称为重绘 回流是布局或者几何属性需要改变就称为回流 Eventloop Settimeout => 渲染一次页面
+        // 浏览器请求相关: post/get/put/delete TCP UDP  TCP 三次握手 客户端发起请求 == SYN 1 ==> 服务端  第二次：服务端：SYN2 + ACK2 ==> 客户端 第三次：客户端 ACK3 ===> 服务端 SYN(请求报文) 防止出现失效的连接请求报文段被服务端接收的情况，从而产生错误。
+        // 从URL 输入到页面渲染 域名解析/DNS查询(基于操作系统) ==> 操作系统会在本地缓存查询IP 存在就直接渲染，没有就去系统配置的DNS 服务器中查询 => 没有继续去DNS根服务器中查询
+        // 找出负责.com 这个等级的域名服务器 ==> 然后进行二级域名查询 ==> 三级域名查询 ==> 就是我们这个ip下的域名 迭代查询 基于 UDP 查询 接下来就是TCP 握手 可能还会先经过负责负载均衡的服务器，它的作用就是将请求合理的分发到多台服务器上，这时假设服务端会响应一个 HTML 文件。
+        // 到浏览器端 状态码进行解析（如果是gzip 先解压再解析，读取文件编码格式） 开始建立DOM 树 + CSSOM树 ，遇见script 停止解析 如果存在async / defer 进行并行下载
+
+        // 算法： 排序 去重 链表翻转
+        // css 基础
+        /**
+         *  盒模型：context: content == content + padding  border-box: content = content + border + padding
+         * css 选择器： id calss(类选择器) 标签 相邻（h1 + p） 子选择（ul> li） *  属性 伪类 ； 可继承：font-size, font-family, color 不可继承：border, padding, margin, width, height 
+         * 居中 ：margin: 0 auto; 浮动元素居中：margin: -50px 0 0 -100px;float: left; position: absolute; width: 200px; height: 100px; left: 50%; top: 50%; 绝对定位居中：margin: 0 auto;
+         *          left: 0; right: 0; flex： juntify 
+         * Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决。
+         * display：none 不显示对应的元素，在文档布局中不再分配空间（回流+重绘） visibility：hidden 隐藏对应元素，在文档布局中仍保留原来的空间（重绘）
+         * 当按百分比设定一个元素的宽度时，它是相对于父容器的宽度计算的，但是，对于一些表示竖向距离的属性，例如 padding-top , padding-bottom , margin-top , margin-bottom 等，当按百分比设定它们时，依据的也是父容器的宽度，而不是高度。
+         * 
+         *  让页面里的字体变清晰，变细用CSS怎么做？
+         * -webkit-font-smoothing在window系统下没有起作用，但是在IOS设备上起作用-webkit-font-smoothing：antialiased是最佳的，灰度平滑。
+         * 
+         * 
+         */
+    </script>
+</body>
+
+</html>

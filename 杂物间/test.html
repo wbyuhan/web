@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var arr = ['a','cd','b','d','e','f']
+    var str = "abcdg";
+   var newArr =[]
+   var reg = new RegExp(arr.join('|'),'g')
+   str.replace(reg,(match,str) =>{
+    console.log('mactc-->',match)
+    console.log('str--->',str)
+})
+  // console.log('cd-->',str.indexOf('cd'))
+    for(var i = 0;i<arr.length;i++){
+       // var index = str.indexOf(arr[i])
+       // console.log('index-->',index)
+       // console.log('strindx-->',str[index])
+      
+        // newArr.splice(index,0,str[index])
+        // console.log(newArr)
+       /** str.replace(arr[i],(match,str) =>{
+            console.log('mactc-->',match)
+            console.log('str--->',str)
+        })*/
+    }
+    console.log(newArr)
+    </script>
+</body>
+</html>

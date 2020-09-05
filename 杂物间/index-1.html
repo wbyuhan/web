@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es6</title>
+    <style>
+        .aa{
+            width: 26.6667vw;
+            height: 10.4167vw;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+          
+        }
+        .aa img{
+            width: 100%;
+            height: 100%;
+        }
+        .aa::before{
+            position: absolute;
+            left: 0;
+            top: 0;
+            content:attr(data-text);
+            display: block;
+            background-image: url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553611237550&di=de192a22c92e5a3f43ddf1c9a7d4a5e5&imgtype=0&src=http%3A%2F%2Fpic180.nipic.com%2Ffile%2F20180909%2F10673188_210425364000_2.jpg");
+            background-size: 200px 100px;
+            opacity: 0.5;
+            color: #ffffff;
+            text-align: center;
+            width: calc(70px *1.414);
+            height: 20px;
+            transform-origin: 50% 50%;
+            transform: rotateZ(-45deg);
+            margin: 18px -21px;
+        }
+        .dd{
+            background-color: red;
+        }
+        .bb{
+            background-color: aqua;
+        }
+        .cc{
+            background-color: black;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div></div>
+    <div class="aa" data-text="我是文字">
+        <img src="http://pic15.nipic.com/20110628/1369025_192645024000_2.jpg" alt="">
+    </div>
+    <div class="dd bb cc">
+        aaaaaa
+    </div>
+
+    <!-- <div class="bb">
+        <div class="bb-1">
+            <img src="" alt="">
+        </div>
+        <div class="bb-2">
+            <img src="http://pic15.nipic.com/20110628/1369025_192645024000_2.jpg" alt="">
+        </div>
+    </div> -->
+</body>
+<script src="app.js"></script>
+</html>

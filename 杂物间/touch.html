@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>touch</title>
+    <style>
+        .content{
+            width: 100vw;
+            height: 100vh;
+            overflow: scroll;
+        }
+        ul{
+            width: 80vw;
+            margin: 0 auto;
+        }
+        li{
+            width: 80vw;
+            height: 20vw;
+            background: #dfdfdf;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.bootcss.com/vConsole/3.3.0/vconsole.min.js"></script>
+</head>
+<body>
+    <div class="content">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>10</li>
+            <li>11</li>
+            <li>12</li>
+            <li>13</li>
+            <li>14</li>
+            <li>15</li>
+            <li>16</li>
+            <li>17</li>
+            <li>18</li>
+            <li>19</li>
+            <li>20</li>
+        </ul>
+    </div>
+
+    <script>
+        // 初始化
+        var vConsole = new VConsole();
+        var scrollStatus=false;
+        window.addEventListener("touchstart", function(e) {
+            　　　　startX = e.changedTouches[0].pageX,
+            　　　　startY = e.changedTouches[0].pageY;
+        },true);
+        window.addEventListener("touchmove", function(e) {
+    　　　　moveEndX = e.changedTouches[0].pageX,
+    　　　　moveEndY = e.changedTouches[0].pageY,
+    　　　　X = moveEndX - startX,
+    　　　　Y = moveEndY - startY;
+    
+    　　　　if ( Math.abs(X) > Math.abs(Y) && X > 0 ) {
+            console.log("从左向右");
+        
+    　　　　}
+    　　　　else if ( Math.abs(X) > Math.abs(Y) && X < 0 ) {
+        　　    console.log("右向左");
+
+    　　　　}
+    　　　　else if ( Math.abs(Y) > Math.abs(X) && Y > 0) {
+        　　　　console.log("下滑");
+                 scrollStatus = false
+    　　　　}
+    　　　　else if ( Math.abs(Y) > Math.abs(X) && Y < 0 ) {
+        　　　　　console.log("上滑");
+                scrollStatus = true
+    　　　　}
+    　　　　else{
+        　　　  console.log("just touch");
+    　　　　}
+        console.log('scrollStatus-->',scrollStatus);
+    　　});
+    
+    </script>
+</body>
+</html>
