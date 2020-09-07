@@ -10,7 +10,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin') // 每次打包前清
 
 // 分离css
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-    // 压缩js
+console.log('%c 🍯 MiniCssExtractPlugin: ', 'font-size:20px;background-color: #FCA650;color:#fff;', MiniCssExtractPlugin);
+// 压缩js
 const TerserJSPlugin = require('terser-webpack-plugin');
 // 压缩css
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -80,10 +81,15 @@ module.exports = { // 导出一个对象
                     {
                         loader: MiniCssExtractPlugin.loader, // 使用的转换器
                         options: {
-                            modules: true
+                            publicPath: (resourcePath, context) => {
+                                // publicPath is the relative path of the resource to the context
+                                // e.g. for ./css/admin/main.css the publicPath will be ../../
+                                // while for ./css/main.css the publicPath will be ../
+                                return path.relative(path.dirname(resourcePath), context) + '/';
+                            },
                         },
                     },
-                    'css-loader',
+                    'css-loader'
                 ]
             },
             // 加载图片
@@ -121,6 +127,11 @@ module.exports = { // 导出一个对象
             //允许 HappyPack 输出日志
             verbose: true,
         }),
+        // 使用压缩css插件
+        new MiniCssExtractPlugin({
+            filename: '[name].[hash].css',
+            chunkFilename: '[id].[hash].css',
+        }),
         new webpack.ProgressPlugin(), // webpack 自带一系列的插件
         //开发模式
         //生产模式
@@ -142,11 +153,7 @@ module.exports = { // 导出一个对象
         }), //创建html模板
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(), // 热更新模块 HRM
-        // 使用压缩css插件
-        new MiniCssExtractPlugin({
-            // filename: "assets/[name].css",
-            // chunkFilename: 'assets/[id].css'
-        }),
+
         // 打包忽略本地     优化三：不引入指定文件
         //以moment时间库为例，locale目录中包含大量的语言包，取消引入该部分，另外手动引入指定语言包（中文）
         // new webpack.IgnorePlugin(/\.\/locale/, /moment/), // 
